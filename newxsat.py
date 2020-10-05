@@ -1,4 +1,5 @@
-import fileinput
+#import fileinput
+import sys
 
 def xsat_3sat(SAT, n, nvars, x):
     aux = []
@@ -26,9 +27,7 @@ def xsat_3sat(SAT, n, nvars, x):
     return xsat_increment(aux, 3, nvars, x)
 
 def xsat_increment(SAT, n, nvars, x):
-	
 	aux = []
-	
 	for i in range(x - n):
 		for j in range(len(SAT)):
 			nvars += 1
@@ -47,9 +46,7 @@ def xsat_increment(SAT, n, nvars, x):
 	return (SAT, nvars)
 
 def reducer(SAT, nclauses, nvars, x):
-	# assuming SAT is >= 3
 	new_sat = []
-	
 	for clause in SAT:
 		n = len(clause)
 		if (x >= n):
@@ -77,24 +74,24 @@ def printDimacs(new_sat, nclauses, nvars):
 	print(out)
 
 def main():
-	
+
 	nvars = 0
 	nclauses = 0
 	SAT = []
-	x = 5
-	for line in fileinput.input():
+	satfile = open(str(sys.argv[1]), "r").readlines()
+	x = int(sys.argv[2])
+
+	for line in satfile:
 		if(line[0:5] == 'p cnf'):
 			b = line.split()
 			nvars = int(b[2])
 			nclauses = int(b[3])
 		elif(line[0] != "c"):
 			l = line.split()
-			c = [int(l[e]) for e in range(len(l) - 1)]
+			c = [int(l[e]) for e in range(len(l) - 1)]		
 			SAT.append(c)
-
-	# print(nvars, nclauses)
-	# print(SAT)
-	new_sat, nclauses, nvars = reducer(SAT, nclauses, nvars, x)
+	
+	new_sat, nclauses, nvars = reducer(SAT, nclauses, nvars, x)	
 	printDimacs(new_sat, nclauses, nvars)
 
 main()	

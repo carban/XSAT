@@ -1,8 +1,8 @@
 #!/bin/sh
 
-for file in instancias/*
+for file in instances/*
 do
-    filename=$(echo $file | sed 's/instancias//g')
-    (python newxsat.py < $file) > reduced/$filename
+    filename=$(echo $file | sed 's/instances//g')
+    python newxsat.py $file $1 > reduced/$filename
     echo "Done"
 done
