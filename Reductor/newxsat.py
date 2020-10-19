@@ -94,4 +94,4 @@ def main():
 	new_sat, nclauses, nvars = reducer(SAT, nclauses, nvars, x)	
 	printDimacs(new_sat, nclauses, nvars)
 
-main()	
+main()
