@@ -50,10 +50,7 @@ def reducer(SAT, nclauses, nvars, x):
 	for clause in SAT:
 		n = len(clause)
 		if (x >= n):
-			if (x >= 3): 
-				res, vars_new = xsat_increment([clause], n, nvars, x)
-			else:
-				res, vars_new = xsat_3sat([clause], n, nvars, x)
+			res, vars_new = xsat_increment([clause], n, nvars, x)
 		else:
 			res, vars_new = xsat_3sat([clause], n, nvars, x)
 		nvars = vars_new 
