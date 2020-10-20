@@ -1,4 +1,3 @@
-#import fileinput
 import sys
 
 def xsat_3sat(SAT, n, nvars, x):
